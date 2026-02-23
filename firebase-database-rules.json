@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "users": {
+      ".indexOn": ["email"],
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$uid": {
+        ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'admin'",
+        ".write": "auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'admin'"
+      }
+    },
+    "sessions": {
+      ".indexOn": ["user_id", "start_time"],
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "complaints": {
+      ".indexOn": ["user_id", "status", "created_at"],
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
